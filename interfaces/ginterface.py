@@ -15,6 +15,8 @@ def get_network_info():
             # Get the public IP address
             public_ip = socket.gethostbyname(socket.gethostname())
 
+            interfacearray = ("Name":{interface_name},"Type":{'Loopback' if interface_name == 'lo' else 'Physical'},"IPV4Address":{ipv4_address},"PublicIP":{public_ip})
+            print(interfacearray)
             # Print the information about the interface
             print(f"Name: {interface_name}\nType: {'Loopback' if interface_name == 'lo' else 'Physical'}\nIPv4 Address: {ipv4_address}\nPublic IP: {public_ip}\n")
 

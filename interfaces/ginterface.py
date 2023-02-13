@@ -24,16 +24,16 @@ def get_network_info():
             # Get the public IP address
             public_ip = get_public_ip()
             
-            name =interface_name
+            space =f' '
             names = f'Name:'
             typee = f'Type:'
-            names = f'Name:'
             types = 'Loopback' if interface_name == 'lo' else 'Physical'
             ipv4 = f'IPv4 Address:'
             ipv4a = ipv4_address
+            interfaceprint = names+space+interface_name+space+typee+space+types+space+ipv4+space+ipv4a+space+public_ip
 
             # Print the information about the interface
-            print(f"{names}{name}\n{typee}{types}\n{ipv4}{ipv4a} \n{public_ip}\n")
+            print(f"{interfaceprint}\n")
 
 # Print the information about the network interfaces
 get_network_info()

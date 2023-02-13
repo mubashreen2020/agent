@@ -38,8 +38,10 @@ def get_network_info():
 # Print the information about the network interfaces
 get_network_info()
 
-def save_interface_info(interfaceprint):
-    # Insert the list of interface data into the MongoDB collection
-    mongodb_connection.collection.insert_many(interfaceprint)
-
-save_interface_info(interfaceprint)
+# insert the data into the collection
+mongodb_connection.collection.insert_many({
+    "name": interface_name,
+    "type": types,
+    "ipv4_address": ipv4a,
+    "public_ip": public_ip
+})

@@ -21,4 +21,4 @@ def stop_interface(interface_name):
         print(f"{interface_name} not found")
 
 # Call the function to stop the interface
-stop_interface("eth0")
+stop_interface("enp0s3")

@@ -29,7 +29,7 @@ def get_network_info():
             types = 'Loopback' if interface_name == 'lo' else 'Physical'
             ipv4 = f'","IPv4 Address": "'
             ipv4a = ipv4_address
-            interfaceprint = names+interface_name+typee+types+ipv4+ipv4a
+            interfaceprint = names+interface_name+typee+types+ipv4+ipv4a+f'"'
 
             # Print the information about the interface
             print(f"{interfaceprint}\n")

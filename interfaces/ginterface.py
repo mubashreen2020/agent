@@ -19,7 +19,8 @@ def get_public_ip():
     response = requests.get("https://api.ipify.org")
     public_ip = response.text
     
-    return public_ip
+
+print(public_ip)
 
 public_ip = get_public_ip()
 

@@ -13,8 +13,6 @@ def get_network_info():
         # Get the first IPv4 address of the interface
         ipv4_address = next((address.address for address in interface_addresses if address.family == socket.AF_INET), None)
 
-        # If the interface has an IPv4 address
-        if ipv4_address:
 
 def get_public_ip():
     # Make a request to a public IP address API

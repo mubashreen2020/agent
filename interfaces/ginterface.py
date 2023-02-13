@@ -1,6 +1,6 @@
 import psutil
 import socket
-import mongodb_connection
+import pymongo
 import requests
 
 def get_public_ip():
@@ -15,6 +15,11 @@ def get_network_info():
     # Get information about the network interfaces
     interfaces = psutil.net_if_addrs()
 
+    # Connect to the MongoDB database
+    client = pymongo.MongoClient("mongodb://localhost:27017/")
+    db = client["reach_manage"]
+    collection = db["interface"]
+
     # Loop through the network interfaces
     for interface_name, interface_addresses in interfaces.items():
         # Get the first IPv4 address of the interface
@@ -26,19 +31,14 @@ def get_network_info():
             public_ip = get_public_ip()
             types = 'Loopback' if interface_name == 'lo' else 'Physical'
             ipv4a = ipv4_address
-            interfaceprint = names+interface_name+typee+types+ipv4+ipv4a+f'"'
 
-# insert the data into the collection
-mongodb_connection.collection.insert_many({
-    
-    "public_ip": public_ip,
-    "name": interface_name,
-    "type": types,
-    "ipv4_address": ipv4a
-})
+            # Insert the information into the MongoDB database
+            collection.insert_one({
+                "interfaces": interface_name,
+                "public_ip": public_ip,
+                "types": types,
+                "ipv4a": ipv4a
+            })
 
-# Confirm the data has been inserted
-print(mongodb_connection.collection.count_documents({}))
-
-# Print the information about the network interfaces
+# Insert the information about the network interfaces into the MongoDB database
 get_network_info()

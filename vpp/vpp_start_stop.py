@@ -1,27 +1,35 @@
 import subprocess
 
+
 def start_vpp():
     # Start the VPP service
     subprocess.run(["service", "vpp", "start"])
 
-    # Check the status of the VPP service
-    result = subprocess.run(["service", "vpp", "status"], capture_output=True)
-
-    # Print the status of the VPP service
-    print(result.stdout.decode().strip())
-
 def stop_vpp():
     # Stop the VPP service
     subprocess.run(["service", "vpp", "stop"])
+    
+def is_vpp_running():
+    try:
+        # Use subprocess to run the "pgrep" command
+        output = subprocess.check_output("pgrep vpp", shell=True)
+        # If VPP is running, the output of the command will not be empty
+        if output:
+            return True
+    except subprocess.CalledProcessError:
+        # If VPP is not running, the "pgrep" command will return a non-zero exit code
+        pass
 
-    # Check the status of the VPP service
-    result = subprocess.run(["service", "vpp", "status"], capture_output=True)
+    return False
 
-    # Print the status of the VPP service
-    print(result.stdout.decode().strip())
-
-# Start the VPP service
+if is_vpp_running():
+    # Start the VPP service
 start_vpp()
-
+    print("VPP is running")
+else:
 # Stop the VPP service
 stop_vpp()
+    print("VPP is not running")
+
+
+

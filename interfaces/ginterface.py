@@ -24,20 +24,17 @@ def get_network_info():
         if ipv4_address:
             # Get the public IP address
             public_ip = get_public_ip()
-            
-            names = f'"Name": "'
-            typee = f'","Type": "'
             types = 'Loopback' if interface_name == 'lo' else 'Physical'
-            ipv4 = f'","IPv4 Address": "'
             ipv4a = ipv4_address
             interfaceprint = names+interface_name+typee+types+ipv4+ipv4a+f'"'
 
 # insert the data into the collection
 mongodb_connection.collection.insert_many({
+    
+    "public_ip": public_ip,
     "name": interface_name,
     "type": types,
-    "ipv4_address": ipv4a,
-    "public_ip": public_ip
+    "ipv4_address": ipv4a
 })
 
 # Confirm the data has been inserted

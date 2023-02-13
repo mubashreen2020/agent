@@ -1,18 +1,12 @@
-import socket
+import requests
 
-def get_public_ip_of_interface(interface):
-    # Get the public IP address of the interface
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(("8.8.8.8", 80))
-    public_ip = s.getsockname()[0]
-    s.close()
+def get_public_ip():
+    # Make a request to a public IP address API
+    response = requests.get("https://api.ipify.org")
+    public_ip = response.text
     
     return public_ip
 
-# Get the public IP address of all interfaces
-interfaces = ["eth0", "wlan0", ...]
-public_ips = {}
-for interface in interfaces:
-    public_ips[interface] = get_public_ip_of_interface(interface)
-    
-print(public_ips)
+public_ip = get_public_ip()
+print(public_ip)
+

@@ -1,17 +1,6 @@
-import openvpn_python
 
-# Path to the OpenVPN configuration file
-config_file = "/path/to/openvpn.conf"
+import subprocess
 
-# Start the OpenVPN connection
-vpn = openvpn_python.openvpn_connect(config_file)
+# Start the OpenVPN service
+subprocess.run(["service", "openvpn", "start", "server"])
 
-# Wait for the connection to be established
-while not vpn.is_connected():
-    pass
-
-# The VPN connection is now established
-print("OpenVPN connection established.")
-
-# Disconnect from the OpenVPN server
-vpn.disconnect()

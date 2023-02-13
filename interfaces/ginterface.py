@@ -32,12 +32,6 @@ def get_network_info():
             ipv4a = ipv4_address
             interfaceprint = names+interface_name+typee+types+ipv4+ipv4a+f'"'
 
-            # Print the information about the interface
-            print(f"{interfaceprint}\n")
-
-# Print the information about the network interfaces
-get_network_info()
-
 # insert the data into the collection
 mongodb_connection.collection.insert_many({
     "name": interface_name,
@@ -45,3 +39,9 @@ mongodb_connection.collection.insert_many({
     "ipv4_address": ipv4a,
     "public_ip": public_ip
 })
+
+# Confirm the data has been inserted
+print(mongodb_connection.collection.count_documents({}))
+
+# Print the information about the network interfaces
+get_network_info()

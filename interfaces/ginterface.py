@@ -24,7 +24,7 @@ def get_network_info():
             # Get the public IP address
             public_ip = get_public_ip()
             
-            name ={interface_name}
+            name =interface_name
 
             # Print the information about the interface
             print(f"{name}\nType: {'Loopback' if interface_name == 'lo' else 'Physical'}\nIPv4 Address: {ipv4_address}\n {public_ip}\n")

@@ -1,6 +1,6 @@
 import psutil
 import socket
-from mongodb_connection import connect_mongodb
+import mongodb_connection
 import requests
 
 def get_public_ip():
@@ -37,3 +37,9 @@ def get_network_info():
 
 # Print the information about the network interfaces
 get_network_info()
+
+def save_interface_info(interfaceprint):
+    # Insert the list of interface data into the MongoDB collection
+    mongodb_connection.collection.insert_many(interfaceprint)
+
+save_interface_info(interfaceprint)

@@ -12,4 +12,4 @@ def get_public_ip():
 # Get the public IP address
 public_ip = get_public_ip()
 
-print("Public IP:", public_ip)
+print(public_ip)

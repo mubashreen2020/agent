@@ -21,7 +21,7 @@ def get_network_info():
     collection = db["interface"]
 
     # Connect to the cloud MongoDB database
-    cloudclient = pymongo.MongoClient("mongodb://localhost:27017")
+    cloudclient = pymongo.MongoClient("mongodb+srv://mj:FsR47oq0d2OjwXkt@cluster0.cc99ozj.mongodb.net/test")
     clouddb = client["reach_manage"]
     cloudcollection = db["interface"]
 

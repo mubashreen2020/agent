@@ -16,7 +16,7 @@ def get_network_info():
     interfaces = psutil.net_if_addrs()
 
     # Connect to the MongoDB database
-    client = pymongo.MongoClient("mongodb://localhost:27017/")
+    client = pymongo.MongoClient("mongodb+srv://mj:FsR47oq0d2OjwXkt@cluster0.cc99ozj.mongodb.net/test")
     db = client["reach_manage"]
     collection = db["interface"]
 

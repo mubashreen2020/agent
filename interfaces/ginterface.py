@@ -20,6 +20,11 @@ def get_network_info():
     db = client["reach_manage"]
     collection = db["interface"]
 
+    # Connect to the cloud MongoDB database
+    cloudclient = pymongo.MongoClient("mongodb://localhost:27017")
+    clouddb = client["reach_manage"]
+    cloudcollection = db["interface"]
+
     # Loop through the network interfaces
     for interface_name, interface_addresses in interfaces.items():
         # Get the first IPv4 address of the interface
@@ -34,6 +39,14 @@ def get_network_info():
 
             # Insert the information into the MongoDB database
             collection.insert_one({
+                "interfaces": interface_name,
+                "public_ip": public_ip,
+                "types": types,
+                "ipv4a": ipv4a
+            })
+
+            # Insert the information into the cloud MongoDB database
+            cloudcollection.insert_one({
                 "interfaces": interface_name,
                 "public_ip": public_ip,
                 "types": types,

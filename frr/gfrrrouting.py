@@ -1,3 +1,4 @@
+import pymongo
 import subprocess
 
 def get_frr_routing_table():
@@ -17,20 +18,29 @@ def get_frr_routing_table():
             destination = columns[0]
             gateway = columns[1]
             metric = columns[2]
-            protocal = columns[4]
+            protocol = columns[4]
             interface = columns[5]
             # Append the routing table entry to the list of entries
             entries.append({
                 "destination": destination,
                 "gateway": gateway,
                 "metric": metric,
-                "protocal": protocal,
+                "protocol": protocol,
                 "interface": interface
             })
     # Return the list of routing table entries
     return entries
 
-# Call the function to get the FRR routing table information
-routing_table = get_frr_routing_table()
-# Print the routing table information
-print(routing_table)
+def save_routing_table_to_mongodb():
+    # Get the routing table information
+    routing_table = get_frr_routing_table()
+    # Connect to the MongoDB database
+    client = pymongo.MongoClient("mongodb://localhost:27017")
+    db = client["routing_table"]
+    collection = db["entries"]
+    # Insert the routing table entries into the MongoDB database
+    for entry in routing_table:
+        collection.insert_one(entry)
+
+# Call the function to save the routing table in the MongoDB database
+save_routing_table_to_mongodb()

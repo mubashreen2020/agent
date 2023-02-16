@@ -15,10 +15,15 @@ def get_network_info():
     # Get information about the network interfaces
     interfaces = psutil.net_if_addrs()
 
-    # Connect to the MongoDB database
-    client = pymongo.MongoClient("mongodb+srv://mj:mj:Mujff%40r@reachmanage.fsjfoer.mongodb.net/?retryWrites=true&w=majority")
+    # Connect to the local MongoDB database
+    client = pymongo.MongoClient("mongodb://localhost:27017")
     db = client["reach_manage"]
     collection = db["interface"]
+    
+    # Connect to the MongoDB database
+    cloudclient = pymongo.MongoClient("mongodb+srv://mj:Mujff%40r@reachmanage.fsjfoer.mongodb.net/?retryWrites=true&w=majority")
+    clouddb = cloudclient["reach_manage"]
+    cloudcollection = clouddb["interface"]
 
     # Loop through the network interfaces
     for interface_name, interface_addresses in interfaces.items():
@@ -34,6 +39,13 @@ def get_network_info():
 
             # Insert the information into the MongoDB database
             collection.insert_one({
+                "interfaces": interface_name,
+                "public_ip": public_ip,
+                "types": types,
+                "ipv4a": ipv4a
+            })
+            # Insert the information into the MongoDB database
+            cloudcollection.insert_one({
                 "interfaces": interface_name,
                 "public_ip": public_ip,
                 "types": types,

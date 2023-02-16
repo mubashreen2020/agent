@@ -36,8 +36,8 @@ def save_routing_table_to_mongodb():
     routing_table = get_frr_routing_table()
     # Connect to the MongoDB database
     client = pymongo.MongoClient("mongodb://localhost:27017")
-    db = client["routing_table"]
-    collection = db["entries"]
+    db = client["reach_manage"]
+    collection = db["frrrouting"]
     # Insert the routing table entries into the MongoDB database
     for entry in routing_table:
         collection.insert_one(entry)

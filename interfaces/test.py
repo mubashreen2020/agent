@@ -1,7 +1,7 @@
 import pymongo
 
 # set up the MongoDB client and database
-client = pymongo.MongoClient("mongodb+srv://mj:Mujff%40r@reachmanage.fsjfoer.mongodb.net/reach_manage",  connect=False )
+client = pymongo.MongoClient("mongodb+srv://mj:mj:Mujff%40r@reachmanage.fsjfoer.mongodb.net/?retryWrites=true&w=majority")
 db = client.test
 
 # select the collection to insert into

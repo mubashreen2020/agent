@@ -18,7 +18,7 @@ def config():
   os.system(f"chmod 777 /etc/openvpn/server/server.conf")
   os.system(f"sudo rm -r /etc/openvpn/server/server.key")
   os.system(f"openvpn --genkey --secret /etc/openvpn/server/{key_name}.key")
-  os.system(f"chmod 777 /etc/openvpn/server/{key_name}.key)
+  os.system(f"chmod 777 /etc/openvpn/server/{key_name}.key")
   print(os.system(f"sudo ufw allow 1194/udp"))
   print(os.system(f"openvpn --config /etc/openvpn/server/server.conf"))
   print(os.system(f"sudo service openvpn restart server"))

@@ -20,7 +20,7 @@ with open("/etc/sysctl.conf","a") as f:
 with open("/etc/ipsec.secrets", "a") as f:
   f.write(f"\n{local_publicip} {remote_publicip} : PSK {q}{psk_key}{q}")
 with open("/etc/ipsec.conf", "a") as f:
-  f.write(f"config setup \n \t charondebug={q}all{q} \n \t uniqueids=yes \n \t strictcrlpolicy=no \n \nconn {conn_name} \n \t authby=secret \n \t left=%defaultroute \n \t leftid={local_publicip} \n \t leftsubnet={local_subnet} \n \t right={remote_publicip} \n \t remotesubnet={remote_subnet} \n \t ike=aes256-sha2_256-modp1024! \n \t esp=aes256-sha2_256! \n \t keyingtries=0 \n \t ikelifetime=1h \n \t lifetime=8h \n \t dpddelay=30 \n \t dpdtimeout=20 \n \t dpdaction=restart \n \t auto=start") 
+  f.write(f"/nconfig setup \n \t charondebug={q}all{q} \n \t uniqueids=yes \n \t strictcrlpolicy=no \nconn {conn_name} \n \t authby=secret \n \t left=%defaultroute \n \t leftid={local_publicip} \n \t leftsubnet={local_subnet} \n \t right={remote_publicip} \n \t rightsubnet={remote_subnet} \n \t ike=aes256-sha2_256-modp1024! \n \t esp=aes256-sha2_256! \n \t keyingtries=0 \n \t ikelifetime=1h \n \t lifetime=8h \n \t dpddelay=30 \n \t dpdtimeout=20 \n \t dpdaction=restart \n \t auto=start") 
 print(os.system(f"sudo iptables -t nat -A POSTROUTING -s {remote_subnet} -d {local_subnet} -j MASQUERADE"))
 print(os.system(f"ipsec restart"))
 print(os.system(f"ipsec up {conn_name}"))

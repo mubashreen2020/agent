@@ -1,15 +1,10 @@
 from flask import Flask, jsonify
-from pymongo import MongoClient
 import socket
 import requests
 import psutil
 
 app = Flask(__name__)
-
-# Connect to the MongoDB database
-client = MongoClient("mongodb+srv://mj:FsR47oq0d2OjwXkt@cluster0.cc99ozj.mongodb.net/test")
-db = client["network_info"]
-collection = db["interfaces"]
+tion = db["interfaces"]
 
 @app.route('/interfaces', methods=['GET'])
 def get_interfaces():
@@ -38,9 +33,6 @@ def get_interfaces():
                 'types': types,
                 'ipv4a': ipv4a
             })
-
-    # Save the interface information to the MongoDB database
-    collection.insert_many(interface_list)
 
     # Return the interface information as a JSON response
     return jsonify(interface_list)

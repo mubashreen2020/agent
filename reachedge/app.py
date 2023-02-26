@@ -9,5 +9,3 @@ def home():
 @app.route('/users')
 def users():
     return 'List of users'
-export FLASK_APP=app.py
-flask run --host=192.168.1.8

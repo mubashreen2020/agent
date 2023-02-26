@@ -45,4 +45,4 @@ def get_public_ip():
     return public_ip
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="192.168.1.9")

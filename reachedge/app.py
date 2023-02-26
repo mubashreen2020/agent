@@ -9,3 +9,7 @@ def home():
 @app.route('/users')
 def users():
     return 'List of users'
+
+
+if __name__ == '__main__':
+    app.run(host='192.168.1.8')

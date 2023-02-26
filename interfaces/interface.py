@@ -4,7 +4,6 @@ import requests
 import psutil
 
 app = Flask(__name__)
-tion = db["interfaces"]
 
 @app.route('/interfaces', methods=['GET'])
 def get_interfaces():

@@ -86,8 +86,8 @@ if(cont=='yes'):
       print(os.system(f"sudo install -m 644 tools/frr.service /etc/systemd/system/frr.service"))
       print(os.system(f"sudo systemctl enable frr"))
 
-	else:
-       exit()
+  else:
+    exit()
 else:
   exit()   
 #*******************edit daemons********************

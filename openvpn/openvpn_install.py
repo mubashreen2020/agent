@@ -25,7 +25,8 @@ def config():
   print(os.system(f"sudo service openvpn status server"))
 
 state = os.system(f"pidof openvpn")
-if state != 256 :
+st = int(state)
+if st != 256 :
     print("Already openvpn is insatlled")
     print("if you want to configure again type yes")
     reconfig = input()

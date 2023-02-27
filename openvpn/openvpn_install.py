@@ -14,7 +14,7 @@ def config():
   print("enter file name of psk")
   key_name = input()
   with open("/etc/openvpn/server/server.conf","w") as f
-    f.write(f"proto udp \n mode p2p \n remote {remote_address} \n local {local_address} \n port 1194 \n dev-type tun \n tun-ipv6 \n resolv-retry infinite \n dev {tunnel_name} \n comp-lzo \n persist-key \n persist-tun \n cipher AES-256-CBC \n ifconfig {local_tunnel_ip} {peer_tunnel_ip} \n secret /etc/openvpn/server/{key_name}.key \n log /var/log/openvpn/openvpn.log")
+    f.write(f"proto udp \nmode p2p \nremote {remote_address} \nlocal {local_address} \nport 1194 \ndev-type tun \ntun-ipv6 \nresolv-retry infinite \ndev {tunnel_name} \ncomp-lzo \npersist-key \npersist-tun \ncipher AES-256-CBC \nifconfig {local_tunnel_ip} {peer_tunnel_ip} \nsecret /etc/openvpn/server/{key_name}.key \nlog /var/log/openvpn/openvpn.log")
   os.system(f"chmod 777 /etc/openvpn/server/server.conf")
   os.system(f"sudo rm -r /etc/openvpn/server/server.key")
   os.system(f"openvpn --genkey --secret /etc/openvpn/server/{key_name}.key")
